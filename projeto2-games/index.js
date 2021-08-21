@@ -43,7 +43,8 @@ console.log(randomGames(randomMinMax(0, games.length)));
 const msg = "teste";
 //GET / home
 app.get("/", (req, res) => {
-  res.send(`<h1>${randomFrase(randomMinMax(0, msgInicio.length + 1))}</h1>`);
+  res.send(`<h1>${randomFrase(randomMinMax(0, msgInicio.length + 1))}</h1>
+  Jogo do dia: <h1>${randomGames(randomMinMax(0, games.length + 1))}</h1>`);
 });
 
 app.get("/games", (req, res) => {
