@@ -1,0 +1,141 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500&display=swap');
+
+@font-face {
+    font-family: Avengers;
+    src: url(avengers.ttf);
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
+body{
+    background-color:#3a6ea5;
+}
+
+h2{
+    margin-bottom: 1rem;
+    text-align: center;
+    font-family: Avengers;
+    letter-spacing: .1rem;
+    font-size: 2rem;
+
+}
+
+p#descripPato{
+    margin-top: 1rem;
+    text-align: center;
+    height: 6rem;
+    width: 42rem;
+    padding: 1rem;
+    box-shadow: 0px 0px 20px 2px black;
+    font-size: 1rem;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+}
+
+img{
+    width: 300px;
+    height: 300px;
+    border: 1px #ffffff none;
+    border-radius: 50%;
+    position: sticky;
+    left: 42%;
+}
+
+ul{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}
+
+
+li{
+    margin-top: 1rem;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background-color:#e7ecef;
+    width: 50rem;
+    height: 30rem;
+    border-radius: 3rem;
+    box-shadow: 10px 10px 40px 5px #022b3a;
+}
+
+div#description{
+    width: 100%;
+}
+
+div#bemvindo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+    font-size: 3rem;
+    font-family: Avengers;
+    color: #ffffff;
+    
+}
+p#verso{
+    color: #aa0505;
+}
+
+div#button{
+    padding-left: 1rem;
+    padding-bottom: 1rem;
+    display: flex;
+}
+div#button p{
+   font-size: 1.3rem;
+   font-family: Avengers;
+   letter-spacing: .1rem;
+}
+main#buttonMain button{
+    padding: .5rem;
+    width: 8%;
+    font-size: 1.2rem;
+    font-family: Avengers;
+    letter-spacing: .1rem;
+    background-color: #aa0505;
+    margin-left: 3rem;
+    margin-top: 0;
+}
+p#quack{
+    color: #aa0505;
+    padding-left: .2rem;
+    padding-right: .2rem;
+}
+p#video, p#video1, p#video2, P#video3{
+    display: none;
+    padding: .5rem;
+    margin-left: .3rem;
+    color: #ffffff;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    letter-spacing: .1rem;
+    font-size: 1.2rem;
+}
+
+button#videobtn{
+    display: none
+}
+
+iframe{
+    display: none;
+    width: 21rem;
+    height: 17rem;
+    padding: 1rem;
+}
+
+main#buttonMain{
+    margin: 0;
+}
