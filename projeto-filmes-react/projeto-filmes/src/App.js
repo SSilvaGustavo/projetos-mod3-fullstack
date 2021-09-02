@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 
 export default function App() {
@@ -35,34 +35,78 @@ export default function App() {
     },
   ]);
 
-  const [nomeFilme, setNomeFilme] = useState("");
-  const [urlFilme, setUrlFilme] = useState("");
+  const [nomeFilme, setNomeFilme] = useState(null);
+  const [urlFilme, setUrlFilme] = useState(null);
+  const [editando, setEditando] = useState(false);
+  const [indexEditando, setIndexEditando] = useState(null);
 
-  const AdicionaFilme = (evento) => {
+  useEffect(() => {
+    if (indexEditando !== null && editando) {
+      setNomeFilme(filmes[indexEditando].nome);
+      setUrlFilme(filmes[indexEditando].imagemUrl);
+    }
+  }, [indexEditando]);
+
+  const handleFilmeChange = (evento) => {
+    setNomeFilme(evento.target.value);
+  };
+
+  const handleUrlChange = (evento) => {
+    setUrlFilme(evento.target.value);
+  };
+
+  const handleSubmit = (evento) => {
     evento.preventDefault();
+    if (editando) {
+      const filmesAtualizados = filmes.map((filme, index) => {
+        if (indexEditando === index) {
+          filme.nome = nomeFilme;
+          filme.imagemUrl = urlFilme;
+        }
+        return filme;
+      });
+      setFilmes(filmesAtualizados);
+      setEditando(false);
+      setIndexEditando(null);
+    }
+    const idAdd = filmes.length + 1;
+    if (!nomeFilme || !urlFilme) {
+      if (!nomeFilme && !urlFilme) {
+        alert("Digite o nome e url do filme");
+      } else if (!nomeFilme) {
+        alert("Digite o nome do filme");
+      } else {
+        alert("Digite o url do filme");
+      }
+    } else {
+      setFilmes([
+        ...filmes,
+        {
+          id: idAdd,
+          nome: nomeFilme,
+          imagemUrl: urlFilme,
+        },
+      ]);
+      console.log(handleSubmit);
+      setNomeFilme("");
+      setUrlFilme("");
+    }
+  };
+
+  const handleDelete = (index) => {
+    setFilmes(filmes.filter((filme, indexfilme) => index !== indexfilme));
   };
 
   return (
     <div className="Container">
-      <h1>Meus Filmes</h1>
-      <ul>
-        {filmes.map((f, index) => (
-          <li key={index}>
-            <h3>{f.nome}</h3>
-            <img src={f.imagemUrl} alt={f.nome} />
-          </li>
-        ))}
-      </ul>
       <h2>Cadastre meu filme</h2>
-      <form>
+      <form onSubmit={handleSubmit}>
         <label>Nome</label>
         <input
           placeholder="Digite o Nome do Filme"
           type="text"
           value={nomeFilme}
-          onChange={(evento) => {
-            setNomeFilme(evento.target.value);
-          }}
+          onChange={handleFilmeChange}
         ></input>
         <br />
         <label>URL da Imagem</label>
@@ -70,13 +114,33 @@ export default function App() {
           placeholder="Digite o URL da Imagem"
           type="text"
           value={urlFilme}
-          onChange={(evento) => {
-            setUrlFilme(evento.target.value);
-          }}
+          onChange={handleUrlChange}
         ></input>
         <br />
         <button type="submit">Enviar</button>
       </form>
+      <h1>Meus Filmes</h1>
+      <ul>
+        {filmes.map((f, index) => (
+          <li key={index}>
+            <h3>{f.nome}</h3>
+            <img src={f.imagemUrl} alt={f.nome} />
+            <br />
+            <button type="button" onClick={() => handleDelete(index)}>
+              Deletar
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setEditando(true);
+                setIndexEditando(index);
+              }}
+            >
+              Editar
+            </button>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
